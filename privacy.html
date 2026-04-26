@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="SlappyHands privacy policy by TomsoftAFP.">
+  <title>SlappyHands Privacy Policy</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172027;
+      --muted: #516070;
+      --paper: #fbfaf6;
+      --panel: #ffffff;
+      --line: #d9ded6;
+      --green: #1f6f57;
+      --rust: #b45f3a;
+      --sky: #d7e8ed;
+      --shadow: 0 18px 42px rgba(32, 40, 45, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Avenir Next, Avenir, Verdana, sans-serif;
+      line-height: 1.6;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 18% 10%, rgba(136, 185, 164, 0.32), transparent 28rem),
+        linear-gradient(135deg, var(--paper), var(--sky));
+    }
+
+    a {
+      color: var(--green);
+      font-weight: 700;
+      text-decoration-thickness: 0.08em;
+      text-underline-offset: 0.18em;
+    }
+
+    .page {
+      min-height: 100vh;
+      padding: 40px 18px;
+    }
+
+    .shell {
+      width: min(880px, 100%);
+      margin: 0 auto;
+      padding: 46px;
+      border: 1px solid rgba(23, 32, 39, 0.1);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.78);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+
+    .back {
+      display: inline-block;
+      margin-bottom: 30px;
+    }
+
+    h1,
+    h2 {
+      margin: 0;
+      line-height: 1.12;
+    }
+
+    h1 {
+      max-width: 12ch;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin-top: 34px;
+      font-size: 1.18rem;
+    }
+
+    p {
+      margin: 14px 0 0;
+      color: var(--muted);
+    }
+
+    ul {
+      margin: 8px 0 0;
+      padding-left: 1.2rem;
+      color: var(--muted);
+    }
+
+    li {
+      margin-top: 10px;
+    }
+
+    strong {
+      color: var(--ink);
+    }
+
+    .updated {
+      margin-top: 18px;
+      color: var(--rust);
+      font-weight: 800;
+    }
+
+    .summary {
+      margin-top: 26px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--panel);
+    }
+
+    @media (max-width: 760px) {
+      .page {
+        padding: 18px;
+      }
+
+      .shell {
+        padding: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <article class="shell">
+      <a class="back" href="index.html">Back to support</a>
+      <h1>SlappyHands Privacy Policy</h1>
+      <p class="updated">Last updated: April 25, 2026</p>
+
+      <section class="summary" aria-labelledby="summary">
+        <h2 id="summary">Summary</h2>
+        <p>
+          SlappyHands does not collect, store, transmit, or share any personal data.
+          The app runs entirely on your Apple Watch and never connects to the internet.
+        </p>
+      </section>
+
+      <section aria-labelledby="data-access">
+        <h2 id="data-access">What Data The App Accesses</h2>
+        <ul>
+          <li>
+            <strong>Motion sensor data</strong> (accelerometer, via Apple's CoreMotion framework).
+            Used only in real time to detect slap gestures. Samples are processed on the watch
+            and are never written to disk, transmitted, or retained after the app closes.
+          </li>
+          <li>
+            <strong>Local app settings</strong> (via Apple's standard UserDefaults). The app stores
+            one preference on the device: whether the diagnostic counter is visible. This setting
+            never leaves the watch.
+          </li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="not-do">
+        <h2 id="not-do">What The App Does Not Do</h2>
+        <ul>
+          <li>No accounts, sign-in, or user identifiers.</li>
+          <li>No network requests, analytics, or telemetry.</li>
+          <li>No third-party SDKs or trackers.</li>
+          <li>No advertising.</li>
+          <li>No HealthKit, location, contacts, photos, or microphone access.</li>
+          <li>No data sold or shared with third parties.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="children">
+        <h2 id="children">Children's Privacy</h2>
+        <p>The app does not knowingly collect any information from anyone, including children under 13.</p>
+      </section>
+
+      <section aria-labelledby="changes">
+        <h2 id="changes">Changes To This Policy</h2>
+        <p>
+          If this policy changes, the updated version will be posted at the same URL as this document,
+          with a new "Last updated" date.
+        </p>
+      </section>
+
+      <section aria-labelledby="contact">
+        <h2 id="contact">Contact</h2>
+        <p>
+          Questions or concerns:
+          <a href="mailto:tomsoftafpsupport@gmail.com">tomsoftafpsupport@gmail.com</a>
+        </p>
+      </section>
+    </article>
+  </main>
+</body>
+</html>
