@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ThereminAir — Play a theremin in the air on your Apple Watch</title>
+<meta name="description" content="ThereminAir turns your Apple Watch into a theremin. Tilt your wrist for pitch, raise and lower for volume — an instrument you play without touching a thing.">
+<meta property="og:title" content="ThereminAir — a theremin you play in the air">
+<meta property="og:description" content="Turn your Apple Watch into a theremin. Tilt for pitch, raise and lower for volume. Free on the App Store.">
+<meta property="og:type" content="website">
+<style>
+  :root{
+    --bg0:#07060f; --bg1:#140a2e; --bg2:#1e1145;
+    --ink:#f4f1ff; --muted:#b9b2d8; --line:rgba(255,255,255,.10);
+    --cyan:#4fe3d1; --violet:#9b7bff; --magenta:#ff6ad5;
+    --card:rgba(255,255,255,.04);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink); background:var(--bg0);
+    background-image:
+      radial-gradient(120% 90% at 50% -10%, var(--bg2) 0%, var(--bg1) 38%, var(--bg0) 78%),
+      radial-gradient(60% 50% at 85% 15%, rgba(79,227,209,.14), transparent 60%),
+      radial-gradient(50% 45% at 12% 8%, rgba(255,106,213,.12), transparent 60%);
+    background-attachment:fixed;
+    line-height:1.55; overflow-x:hidden;
+  }
+  .wrap{max-width:1000px; margin:0 auto; padding:clamp(20px,5vw,48px)}
+  header{display:flex; align-items:center; gap:12px; padding-block:8px 0}
+  .mark{
+    width:38px;height:38px;border-radius:11px;flex:0 0 auto;
+    background:linear-gradient(135deg,var(--cyan),var(--violet) 55%,var(--magenta));
+    box-shadow:0 6px 24px rgba(155,123,255,.4);
+    position:relative;
+  }
+  .mark::after{content:"";position:absolute;inset:0;border-radius:11px;
+    background:radial-gradient(60% 60% at 30% 25%,rgba(255,255,255,.5),transparent 60%)}
+  .brand{font-weight:650;letter-spacing:.2px}
+  /* hero */
+  .hero{text-align:center; padding-block:clamp(36px,8vw,80px) clamp(24px,4vw,40px)}
+  .eyebrow{
+    display:inline-block;font-size:13px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--cyan);border:1px solid var(--line);border-radius:999px;
+    padding:6px 14px;margin-bottom:22px;background:var(--card)
+  }
+  h1{
+    font-size:clamp(2.2rem,6.4vw,4rem);line-height:1.04;letter-spacing:-.02em;font-weight:720;
+    background:linear-gradient(180deg,#ffffff,#c9bfff);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .sub{max-width:620px;margin:20px auto 0;color:var(--muted);font-size:clamp(1.05rem,2.4vw,1.3rem)}
+  /* layout */
+  .stage{
+    display:grid;grid-template-columns:minmax(0,340px) 1fr;gap:clamp(28px,5vw,56px);
+    align-items:center;margin-top:clamp(34px,6vw,64px)
+  }
+  @media (max-width:760px){.stage{grid-template-columns:1fr;justify-items:center}}
+  .phone{
+    width:100%;max-width:340px;aspect-ratio:9/16;border-radius:26px;overflow:hidden;
+    border:1px solid var(--line);
+    box-shadow:0 30px 80px rgba(20,10,46,.7), 0 0 0 1px rgba(255,255,255,.03) inset;
+    background:#000;
+  }
+  .phone iframe{width:100%;height:100%;border:0;display:block}
+  .pitch{max-width:460px}
+  @media (max-width:760px){.pitch{text-align:center}}
+  .pitch h2{font-size:clamp(1.5rem,3.6vw,2rem);letter-spacing:-.01em;margin-bottom:14px}
+  .feat{list-style:none;display:grid;gap:14px;margin-top:22px}
+  .feat li{display:flex;gap:13px;align-items:flex-start;color:var(--muted)}
+  @media (max-width:760px){.feat li{text-align:left}}
+  .dot{
+    flex:0 0 auto;width:22px;height:22px;border-radius:7px;margin-top:2px;
+    background:linear-gradient(135deg,var(--cyan),var(--violet));
+    display:grid;place-items:center;color:#08040f;font-size:13px;font-weight:800
+  }
+  .feat b{color:var(--ink);font-weight:620}
+  /* cta */
+  .cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
+  @media (max-width:760px){.cta{justify-content:center}}
+  .appstore{
+    display:inline-flex;align-items:center;gap:11px;text-decoration:none;
+    background:#fff;color:#000;border-radius:14px;padding:12px 20px;font-weight:600;
+    transition:transform .15s ease, box-shadow .15s ease;
+    box-shadow:0 10px 30px rgba(0,0,0,.35)
+  }
+  .appstore:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(79,227,209,.25)}
+  .appstore small{display:block;font-size:11px;font-weight:500;opacity:.7;line-height:1}
+  .appstore span{font-size:18px;line-height:1.1}
+  .price{align-self:center;color:var(--muted);font-size:.95rem}
+  /* strip */
+  .how{margin-top:clamp(60px,10vw,110px);text-align:center}
+  .how h2{font-size:clamp(1.4rem,3.4vw,1.9rem);margin-bottom:8px}
+  .how p{color:var(--muted);max-width:560px;margin:0 auto}
+  footer{
+    margin-top:clamp(56px,9vw,100px);padding-top:26px;border-top:1px solid var(--line);
+    display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center;justify-content:space-between;
+    color:var(--muted);font-size:.9rem
+  }
+  footer a{color:var(--cyan);text-decoration:none}
+  footer a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="mark" aria-hidden="true"></div>
+    <div class="brand">ThereminAir</div>
+  </header>
+
+  <section class="hero">
+    <span class="eyebrow">Apple Watch instrument</span>
+    <h1>A theremin you play<br>in the air.</h1>
+    <p class="sub">Your wrist becomes the antenna. Tilt for pitch, raise and lower for volume — the legendary instrument you play without ever touching it, now on your Apple Watch.</p>
+  </section>
+
+  <section class="stage">
+    <div class="phone">
+      <iframe
+        src="https://www.youtube.com/embed/W2Q7B1xJ4tw"
+        title="ThereminAir demo"
+        loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
+    </div>
+
+    <div class="pitch">
+      <h2>Play it with a wave of your hand.</h2>
+      <ul class="feat">
+        <li><span class="dot">↔</span><div><b>Tilt for pitch.</b> Sweep smoothly across the range, or lock to musical scales — major, minor, and pentatonic.</div></li>
+        <li><span class="dot">↕</span><div><b>Raise and lower for volume.</b> From a whisper to full voice, controlled by the height of your hand.</div></li>
+        <li><span class="dot">◎</span><div><b>Digital Crown &amp; readouts.</b> Set your ceiling volume, watch the pitch in Hz and note names as you play.</div></li>
+        <li><span class="dot">⌚</span><div><b>One tap from your wrist.</b> Add a complication to your watch face and start playing instantly.</div></li>
+        <li><span class="dot">✓</span><div><b>Private by design.</b> No logins, no ads, no data collection — nothing ever leaves your wrist.</div></li>
+      </ul>
+
+      <div class="cta">
+        <a class="appstore" href="https://apps.apple.com/us/app/thereminair/id6772935515">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.365 1.43c0 1.14-.42 2.2-1.12 2.98-.76.85-2 .95-2.53.9-.06-1.1.44-2.24 1.1-2.96.75-.82 2.06-1.03 2.55-.92zM20.5 17.02c-.36.83-.53 1.2-.99 1.94-.64 1.03-1.55 2.32-2.67 2.33-1 .01-1.26-.65-2.62-.64-1.36.01-1.64.66-2.64.65-1.12-.01-1.98-1.17-2.62-2.2-1.79-2.88-1.98-6.26-.87-8.06.79-1.28 2.03-2.03 3.2-2.03 1.19 0 1.94.66 2.93.66.96 0 1.54-.66 2.92-.66 1.04 0 2.14.57 2.93 1.55-2.57 1.41-2.15 5.08.1 6.16z"/></svg>
+          <span><small>Download on the</small>App Store</span>
+        </a>
+        <div class="price">Free · watchOS 10+</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="how">
+    <h2>Play it like the real thing</h2>
+    <p>The theremin is played by moving your hands through the air near two antennas. ThereminAir maps that same gesture to your Apple Watch's motion sensors — so the motion of your hand, exactly like the original, becomes the music.</p>
+  </section>
+
+  <footer>
+    <div>© <span id="yr">2026</span> Tomsoft · ThereminAir</div>
+    <div><a href="https://tomsoftafp.github.io/index.html">Support</a> · <a href="https://apps.apple.com/us/app/thereminair/id6772935515">App Store</a></div>
+  </footer>
+
+</div>
+<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+</body>
+</html>
